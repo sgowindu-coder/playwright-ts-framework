@@ -1,0 +1,21 @@
+{
+  "name": "playwright-ts-framework",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Playwright TypeScript framework with POM, API testing, fixtures, and CI/CD",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test tests/ui",
+    "test:api": "playwright test tests/api",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}
