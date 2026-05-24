@@ -1,4 +1,5 @@
 # Playwright TypeScript Framework
+![Playwright Tests](https://github.com/sgowindu-coder/playwright-ts-framework/actions/workflows/playwright.yml/badge.svg)
 
 Enterprise-grade test automation framework built with Playwright and TypeScript. Demonstrates production patterns used in financial services QE: Page Object Model, API testing with `APIRequestContext`, custom fixtures, and GitHub Actions CI/CD.
 
