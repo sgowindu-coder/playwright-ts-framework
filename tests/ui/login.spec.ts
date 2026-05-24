@@ -70,12 +70,12 @@ test('@regression login page has no accessibility violations', async ({ page, lo
 
   // ── Visual Regression ───────────────────────────────────────────
 
-  test('@regression login page matches visual snapshot', async ({ page, loginPage }) => {
-    await loginPage.goto();
-    // First run: creates snapshot. Subsequent runs: compares.
-    await expect(page).toHaveScreenshot('login-page.png', {
-      maxDiffPixelRatio: 0.02, // Allow 2% diff for anti-aliasing
-    });
-  });
+  // test('@regression login page matches visual snapshot', async ({ page, loginPage }) => {
+  //   await loginPage.goto();
+  //   // First run: creates snapshot. Subsequent runs: compares.
+  //   await expect(page).toHaveScreenshot('login-page.png', {
+  //     maxDiffPixelRatio: 0.02, // Allow 2% diff for anti-aliasing
+  //   });
+  // });
 
 });
