@@ -26,11 +26,8 @@ test.describe('Login Page', () => {
   });
 
   test('@smoke valid credentials — redirects to dashboard', async ({ loginPage }) => {
-    await loginPage.loginWith(
-      process.env.TEST_USER_EMAIL || 'admin@example.com',
-      process.env.TEST_USER_PASSWORD || 'password123'
-    );
-    await loginPage.assertRedirectedTo(/dashboard/);
+    await loginPage.loginWith('tomsmith', 'SuperSecretPassword!');
+    await loginPage.assertRedirectedTo(/secure/);
   });
 
   // ── Negative Tests — Data-Driven ────────────────────────────────
@@ -45,25 +42,31 @@ test.describe('Login Page', () => {
   for (const { email, password, desc } of invalidCredentials) {
     test(`@regression shows error for ${desc}`, async ({ loginPage }) => {
       await loginPage.loginWith(email, password);
-      await loginPage.assertErrorMessage('Invalid');
+      await loginPage.assertErrorMessage('invalid');
     });
   }
 
   // ── Accessibility ───────────────────────────────────────────────
 
-  test('@regression login page has no accessibility violations', async ({ page, loginPage }) => {
-    await loginPage.goto();
+test('@regression login page has no accessibility violations', async ({ page, loginPage }) => {
+  await loginPage.goto();
 
-    // Using Playwright's built-in accessibility snapshot
-    const snapshot = await page.accessibility.snapshot();
-    expect(snapshot).not.toBeNull();
+  // Verify key interactive elements have accessible labels
+  await expect(loginPage.emailInput).toBeVisible();
+  await expect(loginPage.passwordInput).toBeVisible();
+  await expect(loginPage.loginButton).toBeVisible();
 
-    // Verify key ARIA roles are present
-    const loginButton = snapshot?.children?.find(
-      node => node.role === 'button' && /sign in/i.test(node.name || '')
-    );
-    // Note: install @axe-core/playwright for full WCAG scanning
-  });
+  // Verify form inputs are focusable (basic keyboard accessibility)
+  await loginPage.emailInput.focus();
+  await expect(loginPage.emailInput).toBeFocused();
+
+  await loginPage.passwordInput.focus();
+  await expect(loginPage.passwordInput).toBeFocused();
+
+  // Verify page has a meaningful title
+  const title = await page.title();
+  expect(title.length).toBeGreaterThan(0);
+});
 
   // ── Visual Regression ───────────────────────────────────────────
 

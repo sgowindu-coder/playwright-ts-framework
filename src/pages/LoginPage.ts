@@ -12,15 +12,13 @@ export class LoginPage extends BasePage {
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
   readonly errorMessage: Locator;
-  readonly forgotPasswordLink: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.emailInput       = page.getByLabel('Email');
-    this.passwordInput    = page.getByLabel('Password');
-    this.loginButton      = page.getByRole('button', { name: /sign in/i });
-    this.errorMessage     = page.getByRole('alert');
-    this.forgotPasswordLink = page.getByRole('link', { name: /forgot password/i });
+    this.emailInput    = page.locator('#username');
+    this.passwordInput = page.locator('#password');
+    this.loginButton   = page.locator('button[type="submit"]');
+    this.errorMessage  = page.locator('#flash');
   }
 
   // ── Actions ─────────────────────────────────────────────────────

@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * Playwright Configuration
  * Supports multi-environment via BASE_URL env var
- * Run:  BASE_URL=https://staging.example.com npx playwright test
+ * Run:  BASE_URL=https://the-internet.herokuapp.com/login npx playwright test
  */
 export default defineConfig({
   testDir: './tests',
@@ -21,7 +21,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: process.env.BASE_URL || 'https://reqres.in',
+    baseURL: process.env.BASE_URL || 'https://the-internet.herokuapp.com/login',
     trace: 'on-first-retry',           // Trace only on retry — keeps runs fast
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
