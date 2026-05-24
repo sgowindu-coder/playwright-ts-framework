@@ -82,12 +82,6 @@ test.describe('Posts API — GET', () => {
     expect(Array.isArray(body)).toBeTruthy();
     expect(body.length).toBeGreaterThan(0);
 
-    // Schema check on first comment
-    await client.assertSchema(
-      await apiContext.get(Endpoints.postComments(Posts.existing.id)),
-      {} // schema checked manually below
-    );
-
     const comment = body[0];
     expect(typeof comment.postId).toBe('number');
     expect(typeof comment.id).toBe('number');

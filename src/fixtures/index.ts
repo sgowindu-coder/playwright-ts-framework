@@ -1,6 +1,7 @@
 import { test as base, APIRequestContext, request } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { DashboardPage } from '../pages/DashboardPage';
+const API_BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 /**
  * Custom Fixtures
@@ -39,7 +40,7 @@ export const test = base.extend<AppFixtures>({
   // JSONPlaceholder needs no authentication — clean context only
   apiContext: async ({}, use) => {
     const context = await request.newContext({
-      baseURL: process.env.API_BASE_URL || 'https://jsonplaceholder.typicode.com',
+      baseURL: process.env.API_BASE_URL || API_BASE_URL,
       extraHTTPHeaders: {
         'Content-Type': 'application/json',
         'Accept':       'application/json',
